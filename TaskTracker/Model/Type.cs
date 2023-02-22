@@ -3,6 +3,17 @@ namespace TaskTracker.Model
 {
     public class Type
     {
+        public enum Mode
+        {
+            Task,
+            Person
+        }
+
+        public enum Action
+        {
+            Add,
+            Update
+        }
         public enum Status
         {
             Todo,

@@ -16,11 +16,11 @@ namespace TaskTracker.Model
             List<Task> list = new List<Task>();
             if (File.Exists(fileName))
             {
-                StreamReader reader = File.OpenText(fileName);
-                string s = string.Empty;
-                while ((s = reader.ReadLine()) != null)
+                var lines = File.ReadLines(fileName);
+
+                foreach (var line in lines)
                 {
-                    string[] taskStr = s.Split(',');
+                    string[] taskStr = line.Split(',');
                     Task p = new Task(taskStr[0],
                                       taskStr[1],
                                       DateTime.ParseExact(taskStr[2], "dd/MM/yyyy", null),
@@ -29,13 +29,40 @@ namespace TaskTracker.Model
                                       Type.ConvertStringToStatus(taskStr[5]));
                     list.Add(p);
                 }
-                reader.Close();
             }
             else
             {
                 throw new FileNotFoundException("Could not find file " + fileName);
             }
             return list;
+        }
+
+        public static void Add(Task t)
+        {
+            string[] s = new string[] { t.Name, t.Description,
+                                        t.StartDate.ToString("dd/MM/yyyy"),
+                                        t.DueDate.ToString("dd/MM/yyyy"),
+                                        t.ResposiblePerson.Name,
+                                        Type.ConvertStatusToString(t.Status)};
+
+            File.AppendAllLines(fileName, new List<string> { string.Join(",", s) });
+        }
+
+        public static void Update(string name, Task t)
+        {
+            DeleteByName(name);
+            Add(t);
+        }
+
+        public static void DeleteByName(string name)
+        {
+            List<Task> all = GetAll();
+            all.RemoveAll(t => t.Name == name);
+            File.Delete(fileName);
+            foreach (Task t in all)
+            {
+                Add(t);
+            }
         }
     }
 }

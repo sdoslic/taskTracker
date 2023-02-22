@@ -11,6 +11,10 @@ namespace TaskTracker.Model
         public string Email { get; set; }
         public List<Task> Tasks { get; set; }
 
+        public Person()
+        {
+
+        }
         public Person(string name, DateTime birthday, string email)
         {
             Name = name;
