@@ -57,6 +57,11 @@ namespace TaskTracker.View
                 FrmTask frm = new FrmTask("Adding task", Type.Action.Add);
                 frm.ShowDialog();
                 RefreshTasks();
+            } else
+            {
+                FrmPerson frm = new FrmPerson("Adding person", Type.Action.Add);
+                frm.ShowDialog();
+                RefreshPersons();
             }
             
         }
@@ -75,6 +80,15 @@ namespace TaskTracker.View
                 FrmTask frm = new FrmTask("Updating task", Type.Action.Update, task);
                 frm.ShowDialog();
                 RefreshTasks();
+            } else
+            {
+                DataGridViewRow selectedRow = dgPerson.SelectedRows[0];
+                Person person = new Person(selectedRow.Cells["colPName"].Value.ToString(),
+                                     System.DateTime.ParseExact(selectedRow.Cells["colBirthday"].Value.ToString(), "dd/MM/yyyy", null),
+                                     selectedRow.Cells["colEmail"].Value.ToString());
+                FrmPerson frm = new FrmPerson("Updating person", Type.Action.Update, person);
+                frm.ShowDialog();
+                RefreshPersons();
             }
         }
 
@@ -101,6 +115,17 @@ namespace TaskTracker.View
                     RefreshTasks();
                 }
                 
+            }
+            else
+            {
+                DialogResult res = MessageBox.Show("Are your sure?", "Deleting person", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (res == DialogResult.Yes)
+                {
+                    DataGridViewRow selectedRow = dgPerson.SelectedRows[0];
+                    PersonDAO.DeleteByName(selectedRow.Cells["colPName"].Value.ToString());
+                    RefreshPersons();
+                }
+
             }
         }
     }

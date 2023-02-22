@@ -59,6 +59,12 @@
     <Compile Include="View\FrmChoosePerson.Designer.cs">
       <DependentUpon>FrmChoosePerson.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\FrmPerson.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FrmPerson.Designer.cs">
+      <DependentUpon>FrmPerson.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\FrmTask.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -82,6 +88,9 @@
     </Compile>
     <EmbeddedResource Include="View\FrmChoosePerson.resx">
       <DependentUpon>FrmChoosePerson.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FrmPerson.resx">
+      <DependentUpon>FrmPerson.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\FrmTask.resx">
       <DependentUpon>FrmTask.cs</DependentUpon>

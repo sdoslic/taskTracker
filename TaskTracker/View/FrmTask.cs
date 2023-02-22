@@ -66,7 +66,7 @@ namespace TaskTracker.View
         {
             FrmChoosePerson frm = new FrmChoosePerson();
             frm.ShowDialog();
-            tbPersonName.Text = frm.SelectedPerson.Name;
+            tbPersonName.Text = frm.SelectedPerson == null ? "" : frm.SelectedPerson.Name;
         }
     }
 }

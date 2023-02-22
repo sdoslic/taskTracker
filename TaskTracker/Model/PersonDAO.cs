@@ -55,5 +55,29 @@ namespace TaskTracker.Model
             reader.Close();
             return p;
         }
+
+        public static void Add(Person p)
+        {
+            string[] s = new string[] { p.Name, p.Birthday.ToString("dd/MM/yyyy"), p.Email};
+
+            File.AppendAllLines(fileName, new List<string> { string.Join(",", s) });
+        }
+
+        public static void Update(string name, Person p)
+        {
+            DeleteByName(name);
+            Add(p);
+        }
+
+        public static void DeleteByName(string name)
+        {
+            List<Person> all = GetAll();
+            all.RemoveAll(p => p.Name == name);
+            File.Delete(fileName);
+            foreach (Person p in all)
+            {
+                Add(p);
+            }
+        }
     }
 }

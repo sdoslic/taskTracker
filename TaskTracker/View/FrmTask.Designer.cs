@@ -257,7 +257,9 @@ namespace TaskTracker.View
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(326, 320);
             this.Controls.Add(this.tableLayoutPanel1);
+            this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(342, 359);
+            this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(342, 359);
             this.Name = "FrmTask";
             this.Text = "FrmTask";
