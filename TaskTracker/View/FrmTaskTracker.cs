@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
 using TaskTracker.Controller;
@@ -9,11 +10,11 @@ namespace TaskTracker.View
 {
     public partial class FrmTaskTracker : Form
     {
-        private Type.Mode mode;
+        private Util.Type.Mode mode;
         public FrmTaskTracker()
         {
             InitializeComponent();
-            mode = Type.Mode.Task;
+            mode = Util.Type.Mode.Task;
             RefreshTasks();
             RefreshPeople();
         }
@@ -28,7 +29,8 @@ namespace TaskTracker.View
             }
             catch (FileNotFoundException ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Console.WriteLine("Exception: " + ex.Message);
             }
             tbFilter.Clear();
         }
@@ -38,7 +40,7 @@ namespace TaskTracker.View
             dgTask.Rows.Clear();
             foreach (Task t in tasks)
             {
-                dgTask.Rows.Add(new string[] { t.Name, t.Description, t.StartDate.ToString("dd/MM/yyyy"), t.DueDate.ToString("dd/MM/yyyy"), t.ResposiblePerson.Name, Type.ConvertStatusToString(t.Status) });
+                dgTask.Rows.Add(new string[] { t.Name, t.Description, t.StartDate.ToString("dd/MM/yyyy"), t.DueDate.ToString("dd/MM/yyyy"), t.ResposiblePerson.Name, Util.Type.ConvertStatusToString(t.Status) });
             }
         }
 
@@ -51,7 +53,8 @@ namespace TaskTracker.View
             }
             catch (FileNotFoundException ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Console.WriteLine("Exception: " + ex.Message);
             }
             tbFilter.Clear();
         }
@@ -69,7 +72,7 @@ namespace TaskTracker.View
         {
             FormFactory.Callback cb;
             Entry entry;
-            if (mode == Type.Mode.Task)
+            if (mode == Util.Type.Mode.Task)
             {
                 entry = new Task();
                 cb = new FormFactory.Callback(RefreshTasks);
@@ -79,12 +82,12 @@ namespace TaskTracker.View
                 entry = new Person();
                 cb = new FormFactory.Callback(RefreshPeople);
             }
-            FormFactory.Instance.OpenWindow(mode, Type.Action.Add, cb, entry);
+            FormFactory.Instance.OpenWindow(mode, Util.Type.Action.Add, cb, entry);
         }
 
         private void btnUpdate_Click(object sender, System.EventArgs e)
         {
-            if (mode == Type.Mode.Task)
+            if (mode == Util.Type.Mode.Task)
             {
                 if (dgTask.SelectedRows.Count == 0)
                 {
@@ -97,9 +100,9 @@ namespace TaskTracker.View
                                      System.DateTime.ParseExact(selectedRow.Cells["colStartDate"].Value.ToString(), "dd/MM/yyyy", null),
                                      System.DateTime.ParseExact(selectedRow.Cells["colDueDate"].Value.ToString(), "dd/MM/yyyy", null),
                                      PersonDAO.GetByName(selectedRow.Cells["colPerson"].Value.ToString()),
-                                     Type.ConvertStringToStatus(selectedRow.Cells["colStatus"].Value.ToString()));
+                                     Util.Type.ConvertStringToStatus(selectedRow.Cells["colStatus"].Value.ToString()));
                 FormFactory.Callback cb = new FormFactory.Callback(RefreshTasks);
-                FormFactory.Instance.OpenWindow(mode, Type.Action.Update, cb, task);
+                FormFactory.Instance.OpenWindow(mode, Util.Type.Action.Update, cb, task);
             } else
             {
                 if (dgPerson.SelectedRows.Count == 0)
@@ -112,7 +115,7 @@ namespace TaskTracker.View
                                      System.DateTime.ParseExact(selectedRow.Cells["colBirthday"].Value.ToString(), "dd/MM/yyyy", null),
                                      selectedRow.Cells["colEmail"].Value.ToString());
                 FormFactory.Callback cb = new FormFactory.Callback(RefreshPeople);
-                FormFactory.Instance.OpenWindow(mode, Type.Action.Update, cb, person);
+                FormFactory.Instance.OpenWindow(mode, Util.Type.Action.Update, cb, person);
             }
         }
 
@@ -121,22 +124,30 @@ namespace TaskTracker.View
             dgTodo.Rows.Clear();
             dgOngoing.Rows.Clear();
             dgDone.Rows.Clear();
-            List<Task> tasks = TaskDAO.GetAll();
-            foreach (Task t in tasks)
+            try
             {
-                switch(t.Status)
+                List<Task> tasks = TaskDAO.GetAll();
+                foreach (Task t in tasks)
                 {
-                    case Type.Status.Todo:
-                        dgTodo.Rows.Add(new string[] { t.Name, t.ResposiblePerson.Name });
-                        break;
-                    case Type.Status.Ongoing:
-                        dgOngoing.Rows.Add(new string[] { t.Name, t.ResposiblePerson.Name });
-                        break;
-                    case Type.Status.Done:
-                        dgDone.Rows.Add(new string[] { t.Name, t.ResposiblePerson.Name });
-                        break;
-                }
+                    switch(t.Status)
+                    {
+                        case Util.Type.Status.Todo:
+                            dgTodo.Rows.Add(new string[] { t.Name, t.ResposiblePerson.Name });
+                            break;
+                        case Util.Type.Status.Ongoing:
+                            dgOngoing.Rows.Add(new string[] { t.Name, t.ResposiblePerson.Name });
+                            break;
+                        case Util.Type.Status.Done:
+                            dgDone.Rows.Add(new string[] { t.Name, t.ResposiblePerson.Name });
+                            break;
+                    }
                 
+                }
+            }
+            catch (FileNotFoundException ex)
+            {
+                //MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Console.WriteLine("Exception: " + ex.Message);
             }
         }
 
@@ -144,12 +155,12 @@ namespace TaskTracker.View
         {
             if (tabControl1.SelectedIndex == 0)
             {
-                mode = Type.Mode.Task;
+                mode = Util.Type.Mode.Task;
                 RefreshTasks();
                 splitContainer1.Panel2.Enabled = true;
             } else if (tabControl1.SelectedIndex == 1)
             {
-                mode = Type.Mode.Person;
+                mode = Util.Type.Mode.Person;
                 RefreshPeople();
                 splitContainer1.Panel2.Enabled = true;
             } else if (tabControl1.SelectedIndex == 2)
@@ -161,7 +172,7 @@ namespace TaskTracker.View
 
         private void btnDelete_Click(object sender, System.EventArgs e)
         {
-            if (mode == Type.Mode.Task)
+            if (mode == Util.Type.Mode.Task)
             {
                 if (dgTask.SelectedRows.Count == 0)
                 {
@@ -204,7 +215,7 @@ namespace TaskTracker.View
 
         private void btnFilter_Click(object sender, System.EventArgs e)
         {
-            if (mode == Type.Mode.Task)
+            if (mode == Util.Type.Mode.Task)
             {
                 List<Task> tasks = TaskDAO.FilterTasks(tbFilter.Text.Trim());
                 RefreshTasks(tasks);
@@ -225,7 +236,7 @@ namespace TaskTracker.View
 
         private void dgPerson_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            if (mode == Type.Mode.Person)
+            if (mode == Util.Type.Mode.Person)
             {
                 if (dgPerson.SelectedRows.Count == 0)
                 {

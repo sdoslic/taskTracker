@@ -29,7 +29,8 @@ namespace TaskTracker.View
             }
             catch (FileNotFoundException ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Console.WriteLine("Exception: " + ex.Message);
             }
         }
 
@@ -41,6 +42,11 @@ namespace TaskTracker.View
 
         private void btnSelect_Click(object sender, EventArgs e)
         {
+            if (dgPerson.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Person is not selected.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
             DataGridViewRow selectedRow = dgPerson.SelectedRows[0];
             SelectedPerson = new Person(selectedRow.Cells["colName"].Value.ToString(),
                                         System.DateTime.ParseExact(selectedRow.Cells["colBirthday"].Value.ToString(), "dd/MM/yyyy", null),

@@ -27,7 +27,8 @@ namespace TaskTracker.View
             }
             catch (FileNotFoundException ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Console.WriteLine("Exception: " + ex.Message);
             }
         }
 
