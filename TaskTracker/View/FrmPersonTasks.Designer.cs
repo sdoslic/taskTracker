@@ -71,6 +71,7 @@ namespace TaskTracker.View
             this.dgTasks.AllowUserToAddRows = false;
             this.dgTasks.AllowUserToDeleteRows = false;
             this.dgTasks.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgTasks.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
             this.dgTasks.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgTasks.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colName,
@@ -83,6 +84,7 @@ namespace TaskTracker.View
             this.dgTasks.Location = new System.Drawing.Point(5, 5);
             this.dgTasks.Name = "dgTasks";
             this.dgTasks.ReadOnly = true;
+            this.dgTasks.RowHeadersVisible = false;
             this.dgTasks.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgTasks.Size = new System.Drawing.Size(780, 295);
             this.dgTasks.TabIndex = 0;

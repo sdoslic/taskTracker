@@ -116,16 +116,46 @@ namespace TaskTracker.View
             }
         }
 
+        private void RefreshBoard()
+        {
+            dgTodo.Rows.Clear();
+            dgOngoing.Rows.Clear();
+            dgDone.Rows.Clear();
+            List<Task> tasks = TaskDAO.GetAll();
+            foreach (Task t in tasks)
+            {
+                switch(t.Status)
+                {
+                    case Type.Status.Todo:
+                        dgTodo.Rows.Add(new string[] { t.Name, t.ResposiblePerson.Name });
+                        break;
+                    case Type.Status.Ongoing:
+                        dgOngoing.Rows.Add(new string[] { t.Name, t.ResposiblePerson.Name });
+                        break;
+                    case Type.Status.Done:
+                        dgDone.Rows.Add(new string[] { t.Name, t.ResposiblePerson.Name });
+                        break;
+                }
+                
+            }
+        }
+
         private void tabControl1_SelectedIndexChanged(object sender, System.EventArgs e)
         {
             if (tabControl1.SelectedIndex == 0)
             {
                 mode = Type.Mode.Task;
                 RefreshTasks();
+                splitContainer1.Panel2.Enabled = true;
             } else if (tabControl1.SelectedIndex == 1)
             {
                 mode = Type.Mode.Person;
                 RefreshPeople();
+                splitContainer1.Panel2.Enabled = true;
+            } else if (tabControl1.SelectedIndex == 2)
+            {
+                RefreshBoard();
+                splitContainer1.Panel2.Enabled = false;
             }
         }
 
@@ -216,5 +246,6 @@ namespace TaskTracker.View
                 }
             }
         }
+
     }
 }
