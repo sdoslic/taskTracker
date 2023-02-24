@@ -1,5 +1,4 @@
 ﻿using System;
-using TaskTracker.Util;
 
 namespace TaskTracker.Model
 {

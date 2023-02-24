@@ -4,7 +4,6 @@ using System.IO;
 using System.Windows.Forms;
 using TaskTracker.Controller;
 using TaskTracker.Model;
-using TaskTracker.Util;
 
 namespace TaskTracker.View
 {
