@@ -29,6 +29,7 @@ namespace TaskTracker.View
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmTask));
             this.label1 = new System.Windows.Forms.Label();
             this.tbName = new System.Windows.Forms.TextBox();
@@ -48,9 +49,11 @@ namespace TaskTracker.View
             this.btnClose = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.tableLayoutPanel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -59,17 +62,17 @@ namespace TaskTracker.View
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label1.Location = new System.Drawing.Point(8, 5);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(80, 37);
+            this.label1.Size = new System.Drawing.Size(81, 37);
             this.label1.TabIndex = 0;
             this.label1.Text = "Name:";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // tbName
             // 
-            this.tbName.Location = new System.Drawing.Point(94, 8);
+            this.tbName.Location = new System.Drawing.Point(95, 8);
             this.tbName.Name = "tbName";
             this.tbName.Size = new System.Drawing.Size(193, 20);
             this.tbName.TabIndex = 1;
+            this.tbName.TextChanged += new System.EventHandler(this.tbName_TextChanged);
             // 
             // label2
             // 
@@ -77,14 +80,13 @@ namespace TaskTracker.View
             this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label2.Location = new System.Drawing.Point(8, 42);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(80, 86);
+            this.label2.Size = new System.Drawing.Size(81, 86);
             this.label2.TabIndex = 2;
             this.label2.Text = "Description:";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // tbDescription
             // 
-            this.tbDescription.Location = new System.Drawing.Point(94, 45);
+            this.tbDescription.Location = new System.Drawing.Point(95, 45);
             this.tbDescription.Name = "tbDescription";
             this.tbDescription.Size = new System.Drawing.Size(193, 80);
             this.tbDescription.TabIndex = 3;
@@ -96,24 +98,25 @@ namespace TaskTracker.View
             this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label3.Location = new System.Drawing.Point(8, 128);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(80, 37);
+            this.label3.Size = new System.Drawing.Size(81, 37);
             this.label3.TabIndex = 4;
             this.label3.Text = "Start date:";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // dtpStartDate
             // 
-            this.dtpStartDate.Location = new System.Drawing.Point(94, 131);
+            this.dtpStartDate.Location = new System.Drawing.Point(95, 131);
             this.dtpStartDate.Name = "dtpStartDate";
             this.dtpStartDate.Size = new System.Drawing.Size(193, 20);
             this.dtpStartDate.TabIndex = 5;
+            this.dtpStartDate.ValueChanged += new System.EventHandler(this.dtpStartDate_ValueChanged);
             // 
             // dtpDueDate
             // 
-            this.dtpDueDate.Location = new System.Drawing.Point(94, 168);
+            this.dtpDueDate.Location = new System.Drawing.Point(95, 168);
             this.dtpDueDate.Name = "dtpDueDate";
             this.dtpDueDate.Size = new System.Drawing.Size(193, 20);
             this.dtpDueDate.TabIndex = 7;
+            this.dtpDueDate.ValueChanged += new System.EventHandler(this.dtpDueDate_ValueChanged);
             // 
             // label4
             // 
@@ -121,10 +124,9 @@ namespace TaskTracker.View
             this.label4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label4.Location = new System.Drawing.Point(8, 165);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(80, 37);
+            this.label4.Size = new System.Drawing.Size(81, 37);
             this.label4.TabIndex = 6;
             this.label4.Text = "Due date:";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label5
             // 
@@ -132,25 +134,24 @@ namespace TaskTracker.View
             this.label5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label5.Location = new System.Drawing.Point(8, 202);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(80, 37);
+            this.label5.Size = new System.Drawing.Size(81, 37);
             this.label5.TabIndex = 8;
             this.label5.Text = "Responsible person:";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // tbPersonName
             // 
-            this.tbPersonName.Location = new System.Drawing.Point(3, 6);
+            this.tbPersonName.Location = new System.Drawing.Point(0, 5);
             this.tbPersonName.Name = "tbPersonName";
             this.tbPersonName.ReadOnly = true;
-            this.tbPersonName.Size = new System.Drawing.Size(190, 20);
+            this.tbPersonName.Size = new System.Drawing.Size(182, 20);
             this.tbPersonName.TabIndex = 1;
             this.tbPersonName.TabStop = false;
             // 
             // btnAddPerson
             // 
-            this.btnAddPerson.Location = new System.Drawing.Point(199, 3);
+            this.btnAddPerson.Location = new System.Drawing.Point(185, 5);
             this.btnAddPerson.Name = "btnAddPerson";
-            this.btnAddPerson.Size = new System.Drawing.Size(25, 23);
+            this.btnAddPerson.Size = new System.Drawing.Size(25, 20);
             this.btnAddPerson.TabIndex = 10;
             this.btnAddPerson.Text = "...";
             this.btnAddPerson.UseVisualStyleBackColor = true;
@@ -162,22 +163,23 @@ namespace TaskTracker.View
             this.label6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label6.Location = new System.Drawing.Point(8, 239);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(80, 37);
+            this.label6.Size = new System.Drawing.Size(81, 37);
             this.label6.TabIndex = 11;
             this.label6.Text = "Status:";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // cbStatus
             // 
+            this.cbStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbStatus.FormattingEnabled = true;
             this.cbStatus.Items.AddRange(new object[] {
             "todo",
             "ongoing",
             "done"});
-            this.cbStatus.Location = new System.Drawing.Point(94, 242);
+            this.cbStatus.Location = new System.Drawing.Point(95, 242);
             this.cbStatus.Name = "cbStatus";
             this.cbStatus.Size = new System.Drawing.Size(193, 21);
             this.cbStatus.TabIndex = 12;
+            this.cbStatus.SelectedIndexChanged += new System.EventHandler(this.cbStatus_SelectedIndexChanged);
             // 
             // tableLayoutPanel1
             // 
@@ -201,7 +203,7 @@ namespace TaskTracker.View
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.Padding = new System.Windows.Forms.Padding(5);
+            this.tableLayoutPanel1.Padding = new System.Windows.Forms.Padding(5, 5, 1, 5);
             this.tableLayoutPanel1.RowCount = 7;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 28F));
@@ -218,7 +220,7 @@ namespace TaskTracker.View
             this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.Controls.Add(this.btnClose);
             this.panel2.Controls.Add(this.btnSave);
-            this.panel2.Location = new System.Drawing.Point(150, 280);
+            this.panel2.Location = new System.Drawing.Point(154, 280);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(168, 32);
             this.panel2.TabIndex = 14;
@@ -247,10 +249,14 @@ namespace TaskTracker.View
             // 
             this.panel1.Controls.Add(this.tbPersonName);
             this.panel1.Controls.Add(this.btnAddPerson);
-            this.panel1.Location = new System.Drawing.Point(94, 205);
+            this.panel1.Location = new System.Drawing.Point(95, 205);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(224, 29);
+            this.panel1.Size = new System.Drawing.Size(227, 29);
             this.panel1.TabIndex = 9;
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
             // 
             // FrmTask
             // 
@@ -270,6 +276,7 @@ namespace TaskTracker.View
             this.panel2.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -295,5 +302,6 @@ namespace TaskTracker.View
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

@@ -32,6 +32,13 @@ namespace TaskTracker.View
 
         private void btnSave_Click(object sender, System.EventArgs e)
         {
+            if (!Util.Validator.CheckEmpty(tbName.Text.Trim(), tbName, errorProvider1) ||
+                !Util.Validator.CheckEmpty(dateTimePicker1.Text.Trim(), dateTimePicker1, errorProvider1) ||
+                !Util.Validator.CheckEmpty(tbEmail.Text.Trim(), tbEmail, errorProvider1) ||
+                !Util.Validator.CheckEmail(tbEmail.Text.Trim(), tbEmail, errorProvider1))
+            {
+                return;
+            }
             string oldName = currentPerson != null ? currentPerson.Name : "";
             currentPerson = new Person(tbName.Text.Trim(),
                                        dateTimePicker1.Value,
@@ -46,6 +53,21 @@ namespace TaskTracker.View
             }
 
             Close();
+        }
+
+        private void tbName_TextChanged(object sender, System.EventArgs e)
+        {
+            errorProvider1.Clear();
+        }
+
+        private void dateTimePicker1_ValueChanged(object sender, System.EventArgs e)
+        {
+            errorProvider1.Clear();
+        }
+
+        private void tbEmail_TextChanged(object sender, System.EventArgs e)
+        {
+            errorProvider1.Clear();
         }
     }
 }

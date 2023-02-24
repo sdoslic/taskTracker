@@ -52,9 +52,10 @@
     <Compile Include="Model\PersonDAO.cs" />
     <Compile Include="Model\Task.cs" />
     <Compile Include="Model\TaskDAO.cs" />
-    <Compile Include="Type.cs" />
+    <Compile Include="Util\Type.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Util\Validator.cs" />
     <Compile Include="View\FrmChoosePerson.cs">
       <SubType>Form</SubType>
     </Compile>
