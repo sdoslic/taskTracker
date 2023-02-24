@@ -9,7 +9,7 @@ namespace TaskTracker.Model
 {
     public class PersonDAO
     {
-        private static string fileName = "person.txt";
+        private static string fileName = "person.csv";
 
         public static List<Person> GetAll()
         {
@@ -78,6 +78,13 @@ namespace TaskTracker.Model
             {
                 Add(p);
             }
+        }
+
+        public static List<Person> FilterPerson(string str)
+        {
+            List<Person> list = GetAll();
+            list.RemoveAll(t => !(t.Name.ToLower().Contains(str.ToLower())));
+            return list;
         }
     }
 }
