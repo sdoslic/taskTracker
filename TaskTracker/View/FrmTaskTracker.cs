@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
+using TaskTracker.Controller;
 using TaskTracker.Model;
+using TaskTracker.Util;
 
 namespace TaskTracker.View
 {
@@ -13,7 +15,7 @@ namespace TaskTracker.View
             InitializeComponent();
             mode = Type.Mode.Task;
             RefreshTasks();
-            RefreshPersons();
+            RefreshPeople();
         }
 
         private void RefreshTasks()
@@ -33,7 +35,7 @@ namespace TaskTracker.View
             }
         }
 
-        private void RefreshPersons()
+        private void RefreshPeople()
         {
             dgPerson.Rows.Clear();
             try
@@ -52,18 +54,19 @@ namespace TaskTracker.View
 
         private void btnAdd_Click(object sender, System.EventArgs e)
         {
+            FormFactory.Callback cb;
+            Entry entry;
             if (mode == Type.Mode.Task)
             {
-                FrmTask frm = new FrmTask("Adding task", Type.Action.Add);
-                frm.ShowDialog();
-                RefreshTasks();
-            } else
-            {
-                FrmPerson frm = new FrmPerson("Adding person", Type.Action.Add);
-                frm.ShowDialog();
-                RefreshPersons();
+                entry = new Task();
+                cb = new FormFactory.Callback(RefreshTasks);
             }
-            
+            else
+            {
+                entry = new Person();
+                cb = new FormFactory.Callback(RefreshPeople);
+            }
+            FormFactory.Instance.OpenWindow(mode, Type.Action.Add, cb, entry);
         }
 
         private void btnUpdate_Click(object sender, System.EventArgs e)
@@ -77,18 +80,16 @@ namespace TaskTracker.View
                                      System.DateTime.ParseExact(selectedRow.Cells["colDueDate"].Value.ToString(), "dd/MM/yyyy", null),
                                      PersonDAO.GetByName(selectedRow.Cells["colPerson"].Value.ToString()),
                                      Type.ConvertStringToStatus(selectedRow.Cells["colStatus"].Value.ToString()));
-                FrmTask frm = new FrmTask("Updating task", Type.Action.Update, task);
-                frm.ShowDialog();
-                RefreshTasks();
+                FormFactory.Callback cb = new FormFactory.Callback(RefreshTasks);
+                FormFactory.Instance.OpenWindow(mode, Type.Action.Update, cb, task);
             } else
             {
                 DataGridViewRow selectedRow = dgPerson.SelectedRows[0];
                 Person person = new Person(selectedRow.Cells["colPName"].Value.ToString(),
                                      System.DateTime.ParseExact(selectedRow.Cells["colBirthday"].Value.ToString(), "dd/MM/yyyy", null),
                                      selectedRow.Cells["colEmail"].Value.ToString());
-                FrmPerson frm = new FrmPerson("Updating person", Type.Action.Update, person);
-                frm.ShowDialog();
-                RefreshPersons();
+                FormFactory.Callback cb = new FormFactory.Callback(RefreshPeople);
+                FormFactory.Instance.OpenWindow(mode, Type.Action.Update, cb, person);
             }
         }
 
@@ -122,8 +123,15 @@ namespace TaskTracker.View
                 if (res == DialogResult.Yes)
                 {
                     DataGridViewRow selectedRow = dgPerson.SelectedRows[0];
-                    PersonDAO.DeleteByName(selectedRow.Cells["colPName"].Value.ToString());
-                    RefreshPersons();
+                    string name = selectedRow.Cells["colPName"].Value.ToString();
+                    if (TaskDAO.PersonHasTasks(name))
+                    {
+                        MessageBox.Show("Could not delete person. There are still assigned task(s).", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    } else
+                    {
+                        PersonDAO.DeleteByName(name);
+                        RefreshPeople();
+                    }
                 }
 
             }

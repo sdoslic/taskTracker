@@ -35,6 +35,7 @@ namespace TaskTracker.View
 
         private void btnClose_Click(object sender, EventArgs e)
         {
+            DialogResult = DialogResult.Cancel;
             Close();
         }
 
@@ -44,6 +45,7 @@ namespace TaskTracker.View
             SelectedPerson = new Person(selectedRow.Cells["colName"].Value.ToString(),
                                         System.DateTime.ParseExact(selectedRow.Cells["colBirthday"].Value.ToString(), "dd/MM/yyyy", null),
                                         selectedRow.Cells["colEmail"].Value.ToString());
+            DialogResult = DialogResult.OK;
             Close();
         }
     }

@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TaskTracker.Util;
 
 namespace TaskTracker.Model
 {
@@ -26,7 +27,7 @@ namespace TaskTracker.Model
                                       DateTime.ParseExact(taskStr[2], "dd/MM/yyyy", null),
                                       DateTime.ParseExact(taskStr[3], "dd/MM/yyyy", null),
                                       PersonDAO.GetByName(taskStr[4]),
-                                      Type.ConvertStringToStatus(taskStr[5]));
+                                      Util.Type.ConvertStringToStatus(taskStr[5]));
                     list.Add(p);
                 }
             }
@@ -43,7 +44,7 @@ namespace TaskTracker.Model
                                         t.StartDate.ToString("dd/MM/yyyy"),
                                         t.DueDate.ToString("dd/MM/yyyy"),
                                         t.ResposiblePerson.Name,
-                                        Type.ConvertStatusToString(t.Status)};
+                                        Util.Type.ConvertStatusToString(t.Status)};
 
             File.AppendAllLines(fileName, new List<string> { string.Join(",", s) });
         }
@@ -63,6 +64,12 @@ namespace TaskTracker.Model
             {
                 Add(t);
             }
+        }
+
+        public static bool PersonHasTasks(string name)
+        {
+            List<Task> all = GetAll();
+            return all.Any(t => t.ResposiblePerson.Name == name);
         }
     }
 }

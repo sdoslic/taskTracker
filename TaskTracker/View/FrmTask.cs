@@ -1,5 +1,6 @@
 ﻿using System.Windows.Forms;
 using TaskTracker.Model;
+using TaskTracker.Util;
 
 namespace TaskTracker.View
 {
@@ -8,17 +9,10 @@ namespace TaskTracker.View
         private Type.Action currentAction;
         private Task currentTask;
 
-        public FrmTask(string name, Type.Action action)
+        public FrmTask(Type.Action action, Task t)
         {
             InitializeComponent();
-            Text = name;
-            currentAction = action;
-        }
-
-        public FrmTask(string name, Type.Action action, Task t)
-        {
-            InitializeComponent();
-            Text = name;
+            Text = action == Type.Action.Add ? "Adding task" : "Updating task";
             currentAction = action;
             currentTask = t;
             UpdatedFields();
@@ -65,8 +59,11 @@ namespace TaskTracker.View
         private void btnAddPerson_Click(object sender, System.EventArgs e)
         {
             FrmChoosePerson frm = new FrmChoosePerson();
-            frm.ShowDialog();
-            tbPersonName.Text = frm.SelectedPerson == null ? "" : frm.SelectedPerson.Name;
+            DialogResult res = frm.ShowDialog();
+            if (res == DialogResult.OK)
+            {
+                tbPersonName.Text = frm.SelectedPerson == null ? "" : frm.SelectedPerson.Name;
+            }
         }
     }
 }

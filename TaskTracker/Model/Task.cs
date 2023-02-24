@@ -1,22 +1,31 @@
 ﻿using System;
+using TaskTracker.Util;
 
 namespace TaskTracker.Model
 {
-    public class Task
+    public class Task : Entry
     {
         public string Name { get; set; }
         public string Description { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime DueDate { get; set; }
         public Person ResposiblePerson { get; set; }
-        public Type.Status Status { get; set; }
+        public Util.Type.Status Status { get; set; }
+
+        public Task()
+        {
+            StartDate = DateTime.Today;
+            DueDate = DateTime.Today;
+            ResposiblePerson = new Person();
+            Status = Util.Type.Status.Todo;
+        }
 
         public Task(string name,
                     string desc,
                     DateTime startDate,
                     DateTime dueDate,
                     Person person,
-                    Type.Status status)
+                    Util.Type.Status status)
         {
             Name = name;
             Description = desc;

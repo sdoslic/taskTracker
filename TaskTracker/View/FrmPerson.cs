@@ -1,5 +1,6 @@
 ﻿using System.Windows.Forms;
 using TaskTracker.Model;
+using TaskTracker.Util;
 
 namespace TaskTracker.View
 {
@@ -7,17 +8,11 @@ namespace TaskTracker.View
     {
         private Type.Action currentAction;
         private Person currentPerson;
-        public FrmPerson(string name, Type.Action action)
-        {
-            InitializeComponent();
-            Name = name;
-            currentAction = action;
-        }
 
-        public FrmPerson(string name, Type.Action action, Person p)
+        public FrmPerson(Type.Action action, Person p)
         {
             InitializeComponent();
-            Text = name;
+            Text = action == Type.Action.Add ? "Adding person" : "Updating person";
             currentAction = action;
             currentPerson = p;
             UpdatedFields();

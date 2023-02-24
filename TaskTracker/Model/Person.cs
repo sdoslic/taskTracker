@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace TaskTracker.Model
 {
-    public class Person
+    public class Person : Entry
     {
         public string Name { get; set; }
         public DateTime Birthday { get; set; }
@@ -13,7 +13,8 @@ namespace TaskTracker.Model
 
         public Person()
         {
-
+            Birthday = DateTime.Today;
+            Tasks = new List<Task>();
         }
         public Person(string name, DateTime birthday, string email)
         {

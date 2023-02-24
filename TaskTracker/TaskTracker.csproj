@@ -46,11 +46,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controller\FormFactory.cs" />
+    <Compile Include="Model\Entry.cs" />
     <Compile Include="Model\Person.cs" />
     <Compile Include="Model\PersonDAO.cs" />
     <Compile Include="Model\Task.cs" />
     <Compile Include="Model\TaskDAO.cs" />
-    <Compile Include="Model\Type.cs" />
+    <Compile Include="Type.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="View\FrmChoosePerson.cs">

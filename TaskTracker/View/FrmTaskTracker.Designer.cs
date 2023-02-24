@@ -41,12 +41,12 @@ namespace TaskTracker.View
             this.colStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.dgPerson = new System.Windows.Forms.DataGridView();
-            this.btnDelete = new System.Windows.Forms.Button();
-            this.btnUpdate = new System.Windows.Forms.Button();
-            this.btnAdd = new System.Windows.Forms.Button();
             this.colPName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colBirthday = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colEmail = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnDelete = new System.Windows.Forms.Button();
+            this.btnUpdate = new System.Windows.Forms.Button();
+            this.btnAdd = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -60,6 +60,7 @@ namespace TaskTracker.View
             // 
             // splitContainer1
             // 
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.Location = new System.Drawing.Point(0, 0);
             this.splitContainer1.Name = "splitContainer1";
             this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
@@ -73,8 +74,8 @@ namespace TaskTracker.View
             this.splitContainer1.Panel2.Controls.Add(this.btnDelete);
             this.splitContainer1.Panel2.Controls.Add(this.btnUpdate);
             this.splitContainer1.Panel2.Controls.Add(this.btnAdd);
-            this.splitContainer1.Size = new System.Drawing.Size(800, 450);
-            this.splitContainer1.SplitterDistance = 398;
+            this.splitContainer1.Size = new System.Drawing.Size(803, 357);
+            this.splitContainer1.SplitterDistance = 315;
             this.splitContainer1.TabIndex = 0;
             // 
             // tabControl1
@@ -85,7 +86,7 @@ namespace TaskTracker.View
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(800, 398);
+            this.tabControl1.Size = new System.Drawing.Size(803, 315);
             this.tabControl1.TabIndex = 2;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
@@ -95,7 +96,7 @@ namespace TaskTracker.View
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(792, 372);
+            this.tabPage1.Size = new System.Drawing.Size(795, 289);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Tasks";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -120,7 +121,7 @@ namespace TaskTracker.View
             this.dgTask.Name = "dgTask";
             this.dgTask.ReadOnly = true;
             this.dgTask.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgTask.Size = new System.Drawing.Size(786, 366);
+            this.dgTask.Size = new System.Drawing.Size(789, 283);
             this.dgTask.TabIndex = 0;
             // 
             // colName
@@ -190,39 +191,6 @@ namespace TaskTracker.View
             this.dgPerson.Size = new System.Drawing.Size(786, 366);
             this.dgPerson.TabIndex = 1;
             // 
-            // btnDelete
-            // 
-            this.btnDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDelete.Location = new System.Drawing.Point(713, 13);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(75, 23);
-            this.btnDelete.TabIndex = 2;
-            this.btnDelete.Text = "Delete";
-            this.btnDelete.UseVisualStyleBackColor = true;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
-            // 
-            // btnUpdate
-            // 
-            this.btnUpdate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnUpdate.Location = new System.Drawing.Point(632, 13);
-            this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(75, 23);
-            this.btnUpdate.TabIndex = 1;
-            this.btnUpdate.Text = "Update";
-            this.btnUpdate.UseVisualStyleBackColor = true;
-            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
-            // 
-            // btnAdd
-            // 
-            this.btnAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAdd.Location = new System.Drawing.Point(551, 13);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(75, 23);
-            this.btnAdd.TabIndex = 0;
-            this.btnAdd.Text = "Add";
-            this.btnAdd.UseVisualStyleBackColor = true;
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
-            // 
             // colPName
             // 
             this.colPName.HeaderText = "Name";
@@ -241,12 +209,46 @@ namespace TaskTracker.View
             this.colEmail.Name = "colEmail";
             this.colEmail.ReadOnly = true;
             // 
+            // btnDelete
+            // 
+            this.btnDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDelete.Location = new System.Drawing.Point(716, 3);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(75, 23);
+            this.btnDelete.TabIndex = 2;
+            this.btnDelete.Text = "Delete";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
+            // btnUpdate
+            // 
+            this.btnUpdate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnUpdate.Location = new System.Drawing.Point(635, 3);
+            this.btnUpdate.Name = "btnUpdate";
+            this.btnUpdate.Size = new System.Drawing.Size(75, 23);
+            this.btnUpdate.TabIndex = 1;
+            this.btnUpdate.Text = "Update";
+            this.btnUpdate.UseVisualStyleBackColor = true;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
+            // 
+            // btnAdd
+            // 
+            this.btnAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAdd.Location = new System.Drawing.Point(554, 3);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(75, 23);
+            this.btnAdd.TabIndex = 0;
+            this.btnAdd.Text = "Add";
+            this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            // 
             // FrmTaskTracker
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(803, 357);
             this.Controls.Add(this.splitContainer1);
+            this.MinimumSize = new System.Drawing.Size(479, 360);
             this.Name = "FrmTaskTracker";
             this.Text = "Task Tracker";
             this.splitContainer1.Panel1.ResumeLayout(false);

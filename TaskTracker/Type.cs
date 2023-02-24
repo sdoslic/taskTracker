@@ -1,5 +1,5 @@
 ﻿
-namespace TaskTracker.Model
+namespace TaskTracker.Util
 {
     public class Type
     {
