@@ -192,5 +192,29 @@ namespace TaskTracker.View
                 btnFilter_Click(null, null);
             }
         }
+
+        private void dgPerson_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (mode == Type.Mode.Person)
+            {
+                if (dgPerson.SelectedRows.Count == 0)
+                {
+                    MessageBox.Show("Person is not selected.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+                DataGridViewRow selectedRow = dgPerson.SelectedRows[0];
+                string personName = selectedRow.Cells["colPName"].Value.ToString();
+                List<Task> tasks = TaskDAO.GetByResponsiblePerson(personName);
+                if (tasks.Count == 0)
+                {
+                    MessageBox.Show(personName + " does not have assigned tasks.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                } else
+                {
+                    FrmPersonTasks frm = new FrmPersonTasks("Tasks from " + personName, tasks);
+                    frm.ShowDialog();
+                }
+            }
+        }
     }
 }

@@ -41,14 +41,14 @@ namespace TaskTracker.View
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnUpdate = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
-            this.colStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPerson = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDueDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colStartDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tbFilter = new System.Windows.Forms.TextBox();
             this.btnFilter = new System.Windows.Forms.Button();
+            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colStartDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDueDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPerson = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -134,7 +134,7 @@ namespace TaskTracker.View
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(792, 372);
+            this.tabPage2.Size = new System.Drawing.Size(795, 289);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "People";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -156,8 +156,9 @@ namespace TaskTracker.View
             this.dgPerson.Name = "dgPerson";
             this.dgPerson.ReadOnly = true;
             this.dgPerson.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgPerson.Size = new System.Drawing.Size(786, 366);
+            this.dgPerson.Size = new System.Drawing.Size(789, 283);
             this.dgPerson.TabIndex = 1;
+            this.dgPerson.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.dgPerson_MouseDoubleClick);
             // 
             // colPName
             // 
@@ -210,42 +211,6 @@ namespace TaskTracker.View
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
-            // colStatus
-            // 
-            this.colStatus.HeaderText = "Status";
-            this.colStatus.Name = "colStatus";
-            this.colStatus.ReadOnly = true;
-            // 
-            // colPerson
-            // 
-            this.colPerson.HeaderText = "Responsible person";
-            this.colPerson.Name = "colPerson";
-            this.colPerson.ReadOnly = true;
-            // 
-            // colDueDate
-            // 
-            this.colDueDate.HeaderText = "Due date";
-            this.colDueDate.Name = "colDueDate";
-            this.colDueDate.ReadOnly = true;
-            // 
-            // colStartDate
-            // 
-            this.colStartDate.HeaderText = "Start date";
-            this.colStartDate.Name = "colStartDate";
-            this.colStartDate.ReadOnly = true;
-            // 
-            // colDescription
-            // 
-            this.colDescription.HeaderText = "Description";
-            this.colDescription.Name = "colDescription";
-            this.colDescription.ReadOnly = true;
-            // 
-            // colName
-            // 
-            this.colName.HeaderText = "Name";
-            this.colName.Name = "colName";
-            this.colName.ReadOnly = true;
-            // 
             // tbFilter
             // 
             this.tbFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -265,6 +230,44 @@ namespace TaskTracker.View
             this.btnFilter.Text = "Filter";
             this.btnFilter.UseVisualStyleBackColor = true;
             this.btnFilter.Click += new System.EventHandler(this.btnFilter_Click);
+            // 
+            // colName
+            // 
+            this.colName.HeaderText = "Name";
+            this.colName.Name = "colName";
+            this.colName.ReadOnly = true;
+            // 
+            // colDescription
+            // 
+            this.colDescription.HeaderText = "Description";
+            this.colDescription.Name = "colDescription";
+            this.colDescription.ReadOnly = true;
+            this.colDescription.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // colStartDate
+            // 
+            this.colStartDate.HeaderText = "Start date";
+            this.colStartDate.Name = "colStartDate";
+            this.colStartDate.ReadOnly = true;
+            // 
+            // colDueDate
+            // 
+            this.colDueDate.HeaderText = "Due date";
+            this.colDueDate.Name = "colDueDate";
+            this.colDueDate.ReadOnly = true;
+            // 
+            // colPerson
+            // 
+            this.colPerson.HeaderText = "Responsible person";
+            this.colPerson.Name = "colPerson";
+            this.colPerson.ReadOnly = true;
+            // 
+            // colStatus
+            // 
+            this.colStatus.HeaderText = "Status";
+            this.colStatus.Name = "colStatus";
+            this.colStatus.ReadOnly = true;
+            this.colStatus.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // FrmTaskTracker
             // 
@@ -303,13 +306,13 @@ namespace TaskTracker.View
         private System.Windows.Forms.DataGridViewTextBoxColumn colPName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colBirthday;
         private System.Windows.Forms.DataGridViewTextBoxColumn colEmail;
+        private System.Windows.Forms.Button btnFilter;
+        private System.Windows.Forms.TextBox tbFilter;
         private System.Windows.Forms.DataGridViewTextBoxColumn colName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDescription;
         private System.Windows.Forms.DataGridViewTextBoxColumn colStartDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDueDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPerson;
         private System.Windows.Forms.DataGridViewTextBoxColumn colStatus;
-        private System.Windows.Forms.Button btnFilter;
-        private System.Windows.Forms.TextBox tbFilter;
     }
 }

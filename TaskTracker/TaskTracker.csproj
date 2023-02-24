@@ -67,6 +67,12 @@
     <Compile Include="View\FrmPerson.Designer.cs">
       <DependentUpon>FrmPerson.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\FrmPersonTasks.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FrmPersonTasks.Designer.cs">
+      <DependentUpon>FrmPersonTasks.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\FrmTask.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -93,6 +99,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\FrmPerson.resx">
       <DependentUpon>FrmPerson.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FrmPersonTasks.resx">
+      <DependentUpon>FrmPersonTasks.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\FrmTask.resx">
       <DependentUpon>FrmTask.cs</DependentUpon>

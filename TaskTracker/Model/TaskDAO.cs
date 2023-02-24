@@ -79,5 +79,12 @@ namespace TaskTracker.Model
                                   Util.Type.ConvertStatusToString(t.Status).ToLower().Contains(str.ToLower())));
             return list;
         }
+
+        public static List<Task> GetByResponsiblePerson(string person)
+        {
+            List<Task> list = GetAll();
+            list.RemoveAll(t => t.ResposiblePerson.Name != person);
+            return list;
+        }
     }
 }
